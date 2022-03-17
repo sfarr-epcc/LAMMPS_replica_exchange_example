@@ -21,6 +21,7 @@ The image shows how lower temperature systems in a rough potential energy surfac
 
 
 The exchanges between replicas are computed using the Metropolis exchange criteria which gives the probability of accenting a swap between replicas 1 and 2:
+
 ![metropolis exchange criteria](imgs/metropolis_exchange.png)
 
 For computational efficiency it is the temperatures that are swapped between replicas.
@@ -257,3 +258,12 @@ The plot shows the enhanced sampling capabilities of parallel tempering. The ext
 
 ![Structures](imgs/structures.png)
 The low and high temperature configurations of the polymer and show in the image.
+
+
+
+## Further reading
+
+- https://docs.lammps.org/Howto_replica.html
+- Parallel tempering: Theory, applications, and new perspectives http://dx.doi.org/10.1039/B509983H
+- A temperature predictor for parallel tempering simulations http://dx.doi.org/10.1039/B716554D
+

@@ -16,13 +16,15 @@ at which temperature. The higher temperatures allow the system to overcome free
 energy barriers and therefore improve the sampling.
 
 
-![phase space](imgs/phase_space.png)
+<img src="./imgs/phase_space.png"  width="600" alt="phase space diagram">
+
+
 The image shows how lower temperature systems in a rough potential energy surface end up trapped in local minima. High temperature replicas can overcome the energy barriers.
 
 
 The exchanges between replicas are computed using the Metropolis exchange criteria which gives the probability of accenting a swap between replicas 1 and 2:
 
-![metropolis exchange criteria](imgs/metropolis_exchange.png)
+<img src="./imgs/metropolis_exchange.png"  width="600" alt="metropolis echange">
 
 For computational efficiency it is the temperatures that are swapped between replicas.
 
@@ -34,7 +36,7 @@ This folder contains an example for using replica exchange with LAMMPS. All file
 
 We will use a toy system: A 50 particle bead-spring polymer. This is typical of coarse-grain protein models.
 
-![polymer.txt](imgs/polymer.png)
+<img src="./imgs/polymer.png"  width="600" alt="polymer.txt">
 
 The data file `polymer.txt` contains the system topology. 
 
@@ -89,11 +91,11 @@ The arguments are:
 We have provided an input file that has 10 temperatures spanning 300K to 1000K. These have been chosen to give approximately a 30% acceptance ratio for the swap attempts. As a general rule 30% is a suitable acceptance ratio.
 The number of replicas needed and the temperature spacing is a function of the degrees of freedom of the system. We have used a online calculator to generate the temperature scale.
 
-http://virtualchemistry.org/remd-temperature-generator/
+[http://virtualchemistry.org/remd-temperature-generator/](http://virtualchemistry.org/remd-temperature-generator)
 
-(Source code here: https://github.com/dspoel/remd-temperature-generator
+Source code here: [https://github.com/dspoel/remd-temperature-generator](https://github.com/dspoel/remd-temperature-generator)
 
-Publication: http://dx.doi.org/10.1039/b716554d)
+Publication: [http://dx.doi.org/10.1039/b716554d](http://dx.doi.org/10.1039/b716554d)
 
 Using number of proteins = 50, number of water =0, lower temperature = 300, higher temperature = 1000 and exchange probability = 0.3 you should get the same temperature scale.
 
@@ -167,7 +169,8 @@ It is also important to check that the replicas are fully traversing temperature
 gnuplot> plot "log.lammps" using 1:2 with lines
 ```
 
-![plots of temperature traversal](imgs/traversal.png)
+<img src="./imgs/traversal.png"  width="600" alt="temperature traversal">
+
 
 The plot on the left shows good traversal, the replica reaches T0 and T9 multiple times.
 
@@ -223,7 +226,7 @@ Note that this can be done in serial invidiaully for each temperature. It is tri
 variable I world 0 1 2 3 4 5 6 7 8 9
 ```
 
-To the single temperature index of intrest. E.g.
+to the single temperature index of intrest. E.g.
 
 ```
 variable I index 0
@@ -248,7 +251,7 @@ On ARCHER2 remember to load the gnuplot module
 module load gnuplot
 ```
 
-![Plot of RG histograms](imgs/RG.png)
+<img src="./imgs/RG.png"  width="600" alt="Plot of RG histograms">
 
 We can see that temperature index 0 (300K) has the most well defined peak with the smallest radius of gyration. This typical of a globule like polymer state. The highest temperature index has a different profile, typical of a coil like polymer state.
 
@@ -256,7 +259,10 @@ To reduce the noise on the histograms you would need to run the simulation longe
 
 The plot shows the enhanced sampling capabilities of parallel tempering. The extended high T configurations enable a greater exploration of the compact low T configurations.
 
-![Structures](imgs/structures.png)
+
+
+<img src="./imgs/structures.png"  width="600" alt="polymer structures">
+
 The low and high temperature configurations of the polymer and show in the image.
 
 

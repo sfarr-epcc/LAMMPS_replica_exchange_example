@@ -1,9 +1,16 @@
 # LAMMPS replica exchange example
 
+Introduction and example code for running replica exchange with [LAMMPS](https://www.lammps.org/).
+
+The lesson was given on ARCHER2 so the slurm submission scripts are specific to [ARCHER2](https://www.archer2.ac.uk/), furthermore a precompiled binary of LAMMPS with the REPLIACA package enabled is inlcuded. This will only work on ARCHER2.
+
+The rest of the content is generic, you will need a version of LAMMPS built with the REPLICA package. Tested with LAMMPS version stable patch_29Sep2021_update2.
+
+Author: Stephen Farr, EPCC
 
 ## Replica exchange (also called parallel tempering)
 
-Replica exchange, also known as parallel tempering, is an enhanced sampling technique that can be used on molecular simulations to improve sampling of the phase-space [1]. The idea is to run multiple replicas of the system in parallel, each with a
+Replica exchange, also known as parallel tempering, is an enhanced sampling technique that can be used on molecular simulations to improve sampling of the phase-space. The idea is to run multiple replicas of the system in parallel, each with a
 different temperature, and periodically attempt to exchange which configurations are
 at which temperature. The higher temperatures allow the system to overcome free
 energy barriers and therefore improve the sampling.
@@ -45,20 +52,20 @@ and
 variable	I world 0 1 2 3 4 5 6 7 8 9
 
 ```
-use the world variable to assign a temperature and corresponding index to each replica that will be run. Note here we have chosen to use 10 replicas.
+use the `world` variable type to assign a temperature and corresponding index to each replica that will be run. Note here we have chosen to use 10 replicas.
 
 
 ```
 fix 2 all langevin ${T} ${T} 1000 ${SEED}
 ```
-The substitutions `${T}` set the langevin thermostat settings to the specified temperature for each replica
+The substitutions `${T}` set the langevin thermostat settings to the specified temperature for each replica.
 
 
 ```
 dump		1 all atom 1000 polymer.${I}.lammpstrj
 
 ```
-The substitution `${I}` allows each replica to write its own trajectory
+The substitution `${I}` allows each replica to write its own trajectory.
 
 
 
@@ -88,8 +95,6 @@ http://virtualchemistry.org/remd-temperature-generator/
 Publication: http://dx.doi.org/10.1039/b716554d)
 
 Using number of proteins = 50, number of water =0, lower temperature = 300, higher temperature = 1000 and exchange probability = 0.3 you should get the same temperature scale.
-
-
 
 
 

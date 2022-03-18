@@ -1,7 +1,12 @@
 import numpy as np
 import argparse
 
-#import matplotlib.pyplot as plt
+"""
+Script to check the acceptance ratio of lammps parallel tempering simulations.
+
+Author:
+Stephen Farr, EPCC, 2022
+"""
 
 
 

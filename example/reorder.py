@@ -3,7 +3,10 @@ import argparse
 
 
 """
-Demixes the replica trajectories into constant temperature trajectories.
+Script that re-orders the replica trajectories into constant temperature trajectories for lammps parallel tempering simulations.
+
+Author:
+Stephen Farr, EPCC, 2022
 """
 
 

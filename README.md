@@ -3,7 +3,7 @@
 
 Introduction and example code for running replica exchange with [LAMMPS](https://www.lammps.org/).
 
-The lesson was given on ARCHER2 so the slurm submission scripts are specific to [ARCHER2](https://www.archer2.ac.uk/), furthermore a precompiled binary of LAMMPS with the REPLIACA package enabled is inlcuded. This will only work on ARCHER2.
+The lesson is made for ARCHER2 so the slurm submission scripts are specific to [ARCHER2](https://www.archer2.ac.uk/), furthermore a precompiled binary of LAMMPS with the REPLIACA package enabled is inlcuded. This will only work on ARCHER2.
 
 The rest of the content is generic, you will need a version of LAMMPS built with the REPLICA package. Tested with LAMMPS version stable patch_29Sep2021_update2.
 
@@ -53,7 +53,7 @@ The data file `polymer.txt` contains the system topology.
 
 The input file `run.in` contains the simulation settings.
 
-most of the lines are general to any LAMMPS simulation. The import ones for running replica exchange are the following:
+most of the lines are general to any LAMMPS simulation. The important ones for running replica exchange are the following:
 
 ```
 variable	T world 300.00 354.47 416.81 488.14 569.86 663.45 764.45 865.45 966.45 1000.00
@@ -63,7 +63,7 @@ and
 variable	I world 0 1 2 3 4 5 6 7 8 9
 
 ```
-use the `world` variable type to assign a temperature and corresponding index to each replica that will be run. Note here we have chosen to use 10 replicas.
+Which use the `world` variable type to assign a temperature and corresponding index to each replica that will be run. Note here we have chosen to use 10 replicas.
 
 
 ```
@@ -105,7 +105,14 @@ Source code here: [https://github.com/dspoel/remd-temperature-generator](https:/
 
 Publication: [http://dx.doi.org/10.1039/b716554d](http://dx.doi.org/10.1039/b716554d)
 
-Using number of proteins = 50, number of water =0, lower temperature = 300, higher temperature = 1000 and exchange probability = 0.3 you should get the same temperature scale.
+Using:
+- number of proteins = 50
+- number of water =0
+- lower temperature = 300
+- higher temperature = 1000 
+- exchange probability = 0.3 
+
+you should get the same temperature scale.
 
 
 
@@ -119,9 +126,9 @@ In this example we have 10 replicas so 10 partitions must be used. An example co
 mpirun -np 10 ./lmp_mpi -in run.in -partition 10x1
 ```
 
-This will use 10 mpi processes to run 10 replicas of the simulation (1 mpi processes per replica).
+This will use 10 MPI processes to run 10 replicas of the simulation (1 MPI processes per replica).
 
-More mpi processes per replica can be used, for example
+More MPI processes per replica can be used, for example
 ```
 mpirun -np 20 ./lmp_mpi -in run.in -partition 10x2
 ```
@@ -132,11 +139,30 @@ On ARCHER2 the provided batch script ``run.slurm`` will run this on the compute 
 
 ## Simulation output
 
-The master log file `log.lammps` contains the information about what temperature each replica is at each timestep.
+The master log file `log.lammps` contains the information about which temperature each replica is at each timestep. Below is an example:
+```
+LAMMPS (29 Sep 2021)
+Running on 10 partitions of processors
+Setting up tempering ...
+Step T0 T1 T2 T3 T4 T5 T6 T7 T8 T9
+0 0 1 2 3 4 5 6 7 8 9
+100 1 0 3 2 5 4 7 6 9 8
+200 1 0 3 2 4 5 6 7 8 9
+300 2 0 3 1 4 5 6 7 8 9
+400 3 1 2 0 5 4 7 6 9 8
+500 3 2 1 0 5 4 8 6 9 7
+600 4 2 1 0 6 3 7 5 9 8
+700 3 1 2 0 6 4 7 5 9 8
+800 3 2 1 0 5 4 8 6 9 7
+900 4 2 1 0 6 3 7 5 9 8
+1000 4 1 2 0 6 3 7 5 9 8
+
+```
+If we look at step 1000 we see that replica 0 has temperature index 4 (569.86 K), replica 2 has temperature index 1 (354.47), etc...
 
 Each replica has its own log file `log.lammps.n` which contains the thermo output. The `screen.n` files contain what would usually be printed to the terminal for a normal non-replica lammps run.
 
-The files `polymer.n.lammpstrj` contain the trajectories of each replica. These are continuous in replica space, not in temperature. The temperature of each trajectory varies corresponding to the swaps listed in the master log file. Before analysis the trajectories must be re-ordered into trajectories of the same temperature.
+The files `polymer.n.lammpstrj` contain the trajectories of each replica. These are continuous in coordinate space, not in temperature. The temperature of each trajectory varies corresponding to the swaps listed in the master log file. Before analysis the trajectories must be re-ordered into trajectories of the same temperature.
 
 
 ## Checking the simulation
@@ -261,7 +287,7 @@ module load gnuplot
 
 <img src="./imgs/RG.png"  width="600" alt="Plot of RG histograms">
 
-We can see that temperature index 0 (300K) has the most well defined peak with the smallest radius of gyration. This typical of a globule like polymer state. The highest temperature index has a different profile, typical of a coil like polymer state.
+We can see that temperature index 0 (300K) has the most well defined peak with the smallest radius of gyration. This typical of a globule like polymer state. The highest temperature index 9 (1000K) has a different profile, typical of a coil like polymer state.
 
 To reduce the noise on the histograms you would need to run the simulation longer, we have kept it short here for demonstration purposes.
 
@@ -271,7 +297,7 @@ The plot shows the enhanced sampling capabilities of parallel tempering. The ext
 
 <img src="./imgs/structures.png"  width="600" alt="polymer structures">
 
-The low and high temperature configurations of the polymer and show in the image.
+The low and high temperature configurations of the polymer are shown in the image.
 
 
 

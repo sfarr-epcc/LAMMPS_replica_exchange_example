@@ -1,5 +1,6 @@
 # LAMMPS replica exchange example
 
+
 Introduction and example code for running replica exchange with [LAMMPS](https://www.lammps.org/).
 
 The lesson was given on ARCHER2 so the slurm submission scripts are specific to [ARCHER2](https://www.archer2.ac.uk/), furthermore a precompiled binary of LAMMPS with the REPLIACA package enabled is inlcuded. This will only work on ARCHER2.
@@ -31,8 +32,15 @@ For computational efficiency it is the temperatures that are swapped between rep
 ---
 ## Example system
 
+[https://github.com/sfarr-epcc/LAMMPS_replica_exchange_example.git](https://github.com/sfarr-epcc/LAMMPS_replica_exchange_example.git)
 
 This folder contains an example for using replica exchange with LAMMPS. All files are in the `example` folder.
+
+```
+git clone https://github.com/sfarr-epcc/LAMMPS_replica_exchange_example.git
+cd LAMMPS_replica_exchange_example
+cd example
+```
 
 We will use a toy system: A 50 particle bead-spring polymer. This is typical of coarse-grain protein models.
 
@@ -269,7 +277,7 @@ The low and high temperature configurations of the polymer and show in the image
 
 ## Further reading
 
-- https://docs.lammps.org/Howto_replica.html
-- Parallel tempering: Theory, applications, and new perspectives http://dx.doi.org/10.1039/B509983H
-- A temperature predictor for parallel tempering simulations http://dx.doi.org/10.1039/B716554D
+- [https://docs.lammps.org/Howto_replica.html](https://docs.lammps.org/Howto_replica.html)
+- Parallel tempering: Theory, applications, and new perspectives [http://dx.doi.org/10.1039/B509983H](http://dx.doi.org/10.1039/B509983H)
+- A temperature predictor for parallel tempering simulations [http://dx.doi.org/10.1039/B716554D](http://dx.doi.org/10.1039/B716554D)
 

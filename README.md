@@ -9,6 +9,23 @@ The rest of the content is generic, you will need a version of LAMMPS built with
 
 Author: Stephen Farr, EPCC
 
+## Table of Contents
+   * [Replica exchange](#replica-exchange-also-called-parallel-tempering)
+   * [Example system](#example-system)
+   * [Input file](#input-file)
+   * [Choosing the temperature scale](#choosing-the-temperature-scale)
+   * [Running the simulation](#running-the-simulation)
+   * [Simulation output](#simulation-output)
+   * [Checking the simulation](#checking-the-simulation)
+      * [Acceptance ratios](#acceptance-ratios)
+      * [Traversal of the temperatures](#traversal-of-the-temperatures)
+   * [Reordering the trajectories into constant temperature](#reordering-the-trajectories-into-constant-temperature)
+   * [Analysing the constant temperature trajectories](#analysing-the-constant-temperature-trajectories)
+
+
+---
+
+
 ## Replica exchange (also called parallel tempering)
 
 Replica exchange, also known as parallel tempering, is an enhanced sampling technique that can be used on molecular simulations to improve sampling of the phase-space. The idea is to run multiple replicas of the system in parallel, each with a

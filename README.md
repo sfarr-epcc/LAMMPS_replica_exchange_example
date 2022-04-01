@@ -3,7 +3,10 @@
 
 Introduction and example code for running replica exchange with [LAMMPS](https://www.lammps.org/).
 
-The lesson is made for ARCHER2 so the slurm submission scripts are specific to [ARCHER2](https://www.archer2.ac.uk/), furthermore a precompiled binary of LAMMPS with the REPLIACA package enabled is inlcuded. This will only work on ARCHER2.
+This was made for a lesson on ARCHER2:
+[https://www.archer2.ac.uk/training/courses/220331-adv-lammps/](https://www.archer2.ac.uk/training/courses/220331-adv-lammps/)
+
+The slurm submission scripts are specific to [ARCHER2](https://www.archer2.ac.uk/), furthermore a precompiled binary of LAMMPS with the REPLIACA package enabled is inlcuded. This will only work on ARCHER2.
 
 The rest of the content is generic, you will need a version of LAMMPS built with the REPLICA package. Tested with LAMMPS version stable patch_29Sep2021_update2.
 
